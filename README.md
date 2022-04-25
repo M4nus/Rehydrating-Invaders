@@ -1,2 +1,2 @@
 # Rehydrating-Invaders
-Game for 'Technicaly a GameJam'
+Game for 'Technically a GameJam'
