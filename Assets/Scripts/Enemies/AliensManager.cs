@@ -16,6 +16,7 @@ public class AliensManager : Singleton<AliensManager>
     public Transform spawnPoint;
     public Transform alienParent;
     public List<GameObject> alienPrefabs;
+    public GameObject waterBallPrefab;
 
     public float spawnInterval = 1f;
     public float spawnOffset = 0.15f;
@@ -30,6 +31,7 @@ public class AliensManager : Singleton<AliensManager>
         aliens = FindObjectsOfType<Alien>().ToList();
 
         StartCoroutine(SpawnWave());
+        StartCoroutine(RandomShoot());
         StartCoroutine(StageChanger());
         yield return null;
     }
@@ -53,6 +55,8 @@ public class AliensManager : Singleton<AliensManager>
                 Vector2 newPosition = new Vector2(spawnPoint.position.x + spawnRandomOffset * i, spawnPoint.position.y);
                 Instantiate(alienPrefabs.RandomElement(), newPosition, Quaternion.identity, alienParent);
             }
+
+            aliens = FindObjectsOfType<Alien>().ToList();
         }
     }
 
@@ -74,6 +78,23 @@ public class AliensManager : Singleton<AliensManager>
             }
 
             yield return null;
+        }
+    }
+
+    private IEnumerator RandomShoot()
+    {
+        while(canMove)
+        {
+            if(aliens != null)
+
+            foreach(Alien alien in aliens)
+            {
+                if(Random.Range(0, 50) == 0)
+                {
+                    alien.Shoot();
+                }
+            }
+            yield return new WaitForSeconds(1f);
         }
     }
 

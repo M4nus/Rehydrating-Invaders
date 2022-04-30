@@ -26,4 +26,10 @@ public class Alien : MonoBehaviour
 
         rigidbody.velocity = new Vector2(AliensManager.Instance.multiplier * AliensManager.Instance.speed * Time.fixedDeltaTime, -AliensManager.Instance.fallingSpeed * Time.fixedDeltaTime);
     }
+
+    public void Shoot()
+    {
+        Debug.Log("shoot");
+        Instantiate(AliensManager.Instance.waterBallPrefab, transform.position, Quaternion.identity);
+    }
 }
