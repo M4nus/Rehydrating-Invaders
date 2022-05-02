@@ -8,11 +8,13 @@ public class SpaceshipMovement : MonoBehaviour
 {
     // It's a direction of movement based on input (-1 (left), 1 (right))
     private Vector2 moveDirection;
-
+    private Rigidbody2D rb;
+    private float speed = 2.0f;
 
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
+        rb.AddForce(Vector2.up * speed, ForceMode2D.Impulse);
     }
 
     void FixedUpdate()
@@ -22,7 +24,7 @@ public class SpaceshipMovement : MonoBehaviour
 
     void Move()
     {
-        // Here write your movement code :D
+        rb.MovePosition(rb.position + moveDirection * speed * Time.fixedDeltaTime);
     }
 
     public void OnMove(InputValue input)
