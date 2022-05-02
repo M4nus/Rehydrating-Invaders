@@ -6,10 +6,11 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerInput))]
 public class SpaceshipMovement : MonoBehaviour
 {
+    public float speedHorizontal = 2.0f;
+    public float speedVertical = 0.2f;
     // It's a direction of movement based on input (-1 (left), 1 (right))
     private Vector2 moveDirection;
     private Rigidbody2D rb;
-    private float speed = 2.0f;
 
     [SerializeField]
     private GameObject bulletPrefab;
@@ -19,7 +20,7 @@ public class SpaceshipMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.AddForce(Vector2.up * speed * 0.1f, ForceMode2D.Impulse);
+        rb.AddForce(Vector2.up * speedVertical, ForceMode2D.Impulse);
     }
 
     void FixedUpdate()
@@ -29,7 +30,7 @@ public class SpaceshipMovement : MonoBehaviour
 
     void Move()
     {
-        rb.MovePosition(rb.position + moveDirection * speed * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + moveDirection * speedHorizontal * Time.fixedDeltaTime);
     }
 
     public void OnMove(InputValue input)
