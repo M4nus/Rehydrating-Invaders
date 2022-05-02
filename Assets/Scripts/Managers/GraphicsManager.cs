@@ -24,6 +24,7 @@ public class GraphicsManager : SingletonPersistant<GraphicsManager>
             {
                 alien.transform.GetChild(1).gameObject.SetActive(true);
                 StartCoroutine(AliensManager.Instance.TeleportAlien(alien.transform));
+                AliensManager.Instance.AfterInvasion();
                 StartCoroutine(AliensManager.Instance.ChangeScene());
             }
             yield return null;

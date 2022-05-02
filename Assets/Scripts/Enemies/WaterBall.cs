@@ -29,6 +29,7 @@ public class WaterBall : MonoBehaviour
         }
         if(collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
+            AliensManager.Instance.CheckForPlayerHits();
             Destroy(gameObject);
         }
     }

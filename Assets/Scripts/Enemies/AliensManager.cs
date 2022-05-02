@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Linq;
 using ManusLibrary;
+using TMPro;
 
 public class AliensManager : Singleton<AliensManager>
 {
@@ -27,6 +29,10 @@ public class AliensManager : Singleton<AliensManager>
 
     public int[] timeStamps = new int[4];
     public int currentStamp = 0;
+
+    public TextMeshProUGUI text;
+    public TextMeshProUGUI voiceText;
+    public int playerHitCounter = 0;
 
     IEnumerator Start()
     {
@@ -130,5 +136,46 @@ public class AliensManager : Singleton<AliensManager>
         spawnAmount++;
         speed *= 1.1f;
         spawnInterval -= 0.5f;
+    }
+
+    public void CheckForPlayerHits()
+    {
+        bool fadeOut = false;
+        playerHitCounter++;
+        if(playerHitCounter == 1)
+        {
+            voiceText.ChangeText("Water...?");
+            voiceText.Fade(1f, 2f);
+            fadeOut = true;
+        }
+        else if(playerHitCounter == 4)
+        {
+            voiceText.ChangeText("Are they really invading us?");
+            voiceText.Fade(1f, 2f);
+            fadeOut = true;
+        }
+        else if(playerHitCounter == 6)
+        {
+            voiceText.ChangeText("Seems they don't want to harm us...");
+            voiceText.Fade(1f, 2f);
+            fadeOut = true;
+        }
+
+        if(fadeOut)
+        {
+            StartCoroutine(FadeOut());
+        }
+
+        IEnumerator FadeOut()
+        {
+            yield return new WaitForSeconds(5f);
+            voiceText.Fade(0f, 4f);
+        }
+    }
+
+    public void AfterInvasion()
+    {
+        text.ChangeText("They disappeared...?");
+        text.Fade(1f, 5f);
     }
 }
