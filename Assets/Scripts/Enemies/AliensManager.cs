@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Linq;
 using ManusLibrary;
 
@@ -17,6 +18,7 @@ public class AliensManager : Singleton<AliensManager>
     public Transform alienParent;
     public List<GameObject> alienPrefabs;
     public GameObject waterBallPrefab;
+    public GameObject waterBallExplosionPrefab;
 
     public float spawnInterval = 1f;
     public float spawnOffset = 0.15f;
@@ -28,7 +30,7 @@ public class AliensManager : Singleton<AliensManager>
 
     IEnumerator Start()
     {
-        aliens = FindObjectsOfType<Alien>().ToList();
+        UpdateAliens();
 
         StartCoroutine(SpawnWave());
         StartCoroutine(RandomShoot());
@@ -60,6 +62,11 @@ public class AliensManager : Singleton<AliensManager>
         }
     }
 
+    public void UpdateAliens()
+    {
+        aliens = FindObjectsOfType<Alien>().ToList();
+    }
+
     public IEnumerator StageChanger()
     {
         while(canMove)
@@ -81,10 +88,30 @@ public class AliensManager : Singleton<AliensManager>
         }
     }
 
+    public IEnumerator TeleportAlien(Transform alien)
+    {
+        Vector2 currentPosition = alien.position;
+        Vector2 endPosition = new Vector2(alien.position.x, alien.position.y + 5f);
+        while(currentPosition.y < endPosition.y)
+        {
+            currentPosition.y += Time.deltaTime * 3f;
+            alien.position = currentPosition;
+            yield return null;
+        }
+    }
+
+    public IEnumerator ChangeScene()
+    {
+        yield return new WaitForSeconds(5f);
+        int index = SceneManager.GetActiveScene().buildIndex + 1;
+        SceneManager.LoadScene(index);
+    }
+
     private IEnumerator RandomShoot()
     {
         while(canMove)
         {
+            UpdateAliens();
             if(aliens != null)
 
             foreach(Alien alien in aliens)

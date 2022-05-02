@@ -1,9 +1,4 @@
-#if UNITY_EDITOR
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
-using System.Linq;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class EmissionOverride : MonoBehaviour
@@ -16,7 +11,15 @@ public class EmissionOverride : MonoBehaviour
 
     private GlobalAssets asset;
 
+#if UNITY_EDITOR
     void OnValidate()
+    {
+        SetMaterial();
+        ChangeEmissiveColor();
+    }
+#endif
+
+    private void Start()
     {
         SetMaterial();
         ChangeEmissiveColor();
@@ -24,10 +27,7 @@ public class EmissionOverride : MonoBehaviour
 
     void SetMaterial()
     {
-
-        asset = UnityEditor.AssetDatabase.FindAssets("t:GlobalAssets", new[] { "Assets/Data" })
-                                         .Select(UnityEditor.AssetDatabase.GUIDToAssetPath)
-                                         .Select(UnityEditor.AssetDatabase.LoadAssetAtPath<GlobalAssets>).First();
+        asset = Resources.Load<GlobalAssets>("Data/GlobalAssets");
         GetComponent<SpriteRenderer>().sharedMaterial = new Material(asset.emissive);
     }
 
@@ -42,4 +42,3 @@ public class EmissionOverride : MonoBehaviour
         material.SetColor("_EmissionColor", color * intensity);
     }
 }
-#endif

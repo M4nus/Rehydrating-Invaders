@@ -31,7 +31,10 @@ public class LimitersCollider : MonoBehaviour
                     break;
 
                 case LimiterType.EndLine:
-                    AliensManager.Instance.canMove = false;
+                    collision.transform.GetChild(1).gameObject.SetActive(true);
+                    StartCoroutine(AliensManager.Instance.TeleportAlien(collision.transform));
+                    AliensManager.Instance.UpdateAliens();
+                    Destroy(collision.gameObject, 2f);
                     break;
             }
         }

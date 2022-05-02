@@ -4,4 +4,5 @@ using UnityEngine;
 public class GlobalAssets : ScriptableObject
 {
     public Material emissive;
+    public Material earthMaterial;
 }
