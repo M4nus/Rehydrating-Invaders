@@ -11,6 +11,11 @@ public class SpaceshipMovement : MonoBehaviour
     private Rigidbody2D rb;
     private float speed = 2.0f;
 
+    [SerializeField]
+    private GameObject bulletPrefab;
+    private bool canShoot = true;
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -32,5 +37,19 @@ public class SpaceshipMovement : MonoBehaviour
         // I'm getting an input (WSAD, Arrows or Gamepad) and assigning it's value to Vector2 that has 0 in Y axis as we just want to move left and right
         Vector2 inputDirection = input.Get<Vector2>();
         moveDirection = new Vector2(inputDirection.x, 0f);
+    }
+
+    public void OnShoot()
+    {
+        if(canShoot)
+        {
+            Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+            StartCoroutine(Cooldown());
+        }
+
+        IEnumerator Cooldown()
+        {
+            yield return new WaitForSeconds(0.5f);
+        }
     }
 }

@@ -21,6 +21,7 @@ public class AliensManager : Singleton<AliensManager>
     public List<GameObject> alienPrefabs;
     public GameObject waterBallPrefab;
     public GameObject waterBallExplosionPrefab;
+    public GameObject bulletExplosionPrefab;
 
     public float spawnInterval = 1f;
     public float spawnOffset = 0.15f;
