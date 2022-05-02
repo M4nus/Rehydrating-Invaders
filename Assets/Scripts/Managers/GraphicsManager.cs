@@ -5,6 +5,8 @@ public class GraphicsManager : SingletonPersistant<GraphicsManager>
 {
     public GlobalAssets globalAssets;
 
+    public Animation panel;
+
     public float currentWaterAmount;
     public float currentWaterThreshold;
     public float waterPerHit = 0.1f;
@@ -25,6 +27,7 @@ public class GraphicsManager : SingletonPersistant<GraphicsManager>
                 alien.transform.GetChild(1).gameObject.SetActive(true);
                 StartCoroutine(AliensManager.Instance.TeleportAlien(alien.transform));
                 AliensManager.Instance.AfterInvasion();
+                panel.Play();
                 StartCoroutine(AliensManager.Instance.ChangeScene());
             }
             yield return null;

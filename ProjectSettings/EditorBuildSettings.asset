@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Invaders.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
+    path: Assets/Scenes/Asteroids.unity
+    guid: bf2f753e03016bd419d56fe01038a9e2
+  - enabled: 1
     path: Assets/Scenes/Outro.unity
     guid: 3ccc9c3071037474f8c46ba9fc40cbe5
   m_configObjects:

@@ -5,7 +5,9 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     public GameObject asteroidPrefab;
+    public GameObject aliensPrefab;
     public Transform spawnPosition;
+
     public float delay;
     public bool canSpawn = true;
     public float spawnOffset;
@@ -24,8 +26,8 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    void Update()
+    public void SpawnAliens()
     {
-
+        Instantiate(aliensPrefab, spawnPosition.position, Quaternion.identity);
     }
 }

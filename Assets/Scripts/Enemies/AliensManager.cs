@@ -123,7 +123,7 @@ public class AliensManager : Singleton<AliensManager>
 
             foreach(Alien alien in aliens)
             {
-                if(Random.Range(0, 50) == 0)
+                if(Random.Range(0, 35) == 0)
                 {
                     alien.Shoot();
                 }

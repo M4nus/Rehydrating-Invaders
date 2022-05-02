@@ -85,7 +85,7 @@ Material:
     - _EnableExternalAlpha: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _WaterAmount: 0
+    - _WaterAmount: 0.04000594
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DarkGroundColor: {r: 0.03773582, g: 0.02141923, b: 0.006585969, a: 0}
