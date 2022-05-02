@@ -60,3 +60,6 @@ crashlytics-build.properties
 
 # MacOS generated files
 *.DS_Store
+
+# VS Code generaled files
+*.vscode
