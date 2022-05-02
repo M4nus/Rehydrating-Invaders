@@ -14,7 +14,7 @@ public class SpaceshipMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.AddForce(Vector2.up * speed, ForceMode2D.Impulse);
+        rb.AddForce(Vector2.up * speed * 0.1f, ForceMode2D.Impulse);
     }
 
     void FixedUpdate()
